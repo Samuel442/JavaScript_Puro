@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        #balao{
+            width: 80px;
+            height: 35px;
+            background-color: black;
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+        p{
+            margin: 0px;
+            font-family: sans-serif;
+        }
+    </style>
+    <div id = "balao">
+        <p>X: <span id = "px"></span></p>
+        <p>Y: <span id = "py"></span></p>
+    </div>
+    <script>
+        window.addEventListener('mousemove',(event) => {
+            let balao = document.getElementById('balao')
+            let px = document.getElementById('px')
+            let py = document.getElementById('py')
+            let x = event.clientX 
+            let y = event.clientY 
+            balao.style.top = y + 'px';
+            balao.style.left = x + (15) + 'px';
+            px.innerText = x
+            py.innerText = y
+        })
+    </script>
+</body>
+</html>
