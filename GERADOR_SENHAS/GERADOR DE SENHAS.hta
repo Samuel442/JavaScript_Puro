@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerador de Senhas</title>
+    <hta:application windowState="maximize" />
+    <style>
+        .generator {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #333333;
+            color: white;
+        }
+
+        .generator label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .generator button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="generator">
+        <h1>Gerador de Senhas</h1>
+        <label for="password">Senha:</label>
+        <input type="text" id="password" readonly>
+        <br>
+        <button onclick="generatePassword()" class="green-button">Gerar Senha</button>
+    </div>
+
+    <script>
+        function generatePassword() {
+            var uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var alphanumericCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-*!@#$%&()';
+            var numbers = '0123456789';
+
+            var password = '';
+
+            // Adiciona uma letra maiúscula
+            password += uppercaseLetters.charAt(Math.floor(Math.random() * uppercaseLetters.length));
+
+            // Adiciona um caractere alfanumérico
+            password += alphanumericCharacters.charAt(Math.floor(Math.random() * alphanumericCharacters.length));
+
+            // Adiciona um número
+            password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+
+            // Completa o restante da senha com caracteres aleatórios
+            while (password.length < 8) {
+                password += alphanumericCharacters.charAt(Math.floor(Math.random() * alphanumericCharacters.length));
+            }
+
+            document.getElementById('password').value = password;
+        }
+    </script>
+</body>
+</html>
