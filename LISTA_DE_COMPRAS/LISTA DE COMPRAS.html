@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Compras</title>
+    <script type="text/javascript">
+        // Array para armazenar os itens da lista de compras
+        var listaCompras = [];
+
+        // Função para adicionar um item na lista
+        function adicionarItem() {
+            var item = document.getElementById("item").value;
+            if (item !== "") {
+                listaCompras.push(item);
+                exibirLista();
+                document.getElementById("item").value = "";
+                salvarListaNoLocalStorage();
+            }
+        }
+
+        // Função para remover um item da lista
+        function removerItem(index) {
+            listaCompras.splice(index, 1);
+            exibirLista();
+            salvarListaNoLocalStorage();
+        }
+
+        // Função para exibir a lista de compras na página
+        function exibirLista() {
+            var listaHTML = "<ul>";
+            for (var i = 0; i < listaCompras.length; i++) {
+                listaHTML += "<li>" + listaCompras[i] + " <button style='margin-left: 10px;' onclick='removerItem(" + i + ")'>Remover</button></li>";
+            }
+            listaHTML += "</ul>";
+            document.getElementById("lista").innerHTML = listaHTML;
+        }
+
+        // Função para salvar a lista de compras no localStorage
+        function salvarListaNoLocalStorage() {
+            localStorage.setItem("listaCompras", JSON.stringify(listaCompras));
+        }
+
+        // Função para carregar a lista de compras do localStorage
+        function carregarListaDoLocalStorage() {
+            var listaSalva = localStorage.getItem("listaCompras");
+            if (listaSalva) {
+                listaCompras = JSON.parse(listaSalva);
+                exibirLista();
+            }
+        }
+
+        // Carrega a lista de compras do localStorage ao carregar a página
+        window.onload = carregarListaDoLocalStorage;
+    </script>
+</head>
+<body>
+    <h1>Lista de Compras</h1>
+    <input type="text" id="item" placeholder="Digite um item">
+    <button onclick="adicionarItem()">Adicionar</button>
+    <div id="lista"></div>
+</body>
+</html>
